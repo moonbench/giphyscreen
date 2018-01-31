@@ -1,0 +1,32 @@
+.App {
+  text-align: left;
+}
+
+.logo-text {
+  fill: #FFF;
+}
+
+.tiled {
+  vertical-align: top;
+}
+.tiled .image {
+  display: inline-block;
+  width: 20%;
+  height: 10em;
+  border: 3px solid #333;
+  background-color: #222;
+  overflow: hidden;
+  vertical-align: top;
+}
+.tiled .image .title {
+  display: none;
+  background-color: rgba(0,0,0,0.6);
+  font-size: 0.9em;
+  padding: 0.3em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tiled .image:hover .title {
+  display: block;
+}
