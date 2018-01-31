@@ -38,7 +38,7 @@ class NoImages extends Component {
           <div className="phrase">
             Use the <Search queryFn={this.props.searchImages} />
           </div>
-          <div classname="phrase">
+          <div className="phrase">
             or press <TrendingButton getImages={this.props.getImages} />
           </div>
           to find some.
