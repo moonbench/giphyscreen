@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Search from './Search.js';
 import {TrendingButton} from './Buttons.js';
 
+
+/**
+ * An array of preview images (as individual tiles)
+ */
 class Tiles extends Component {
   render(){
     return(
@@ -21,6 +25,10 @@ class Tiles extends Component {
   }
 }
 
+
+/**
+ * A helpful error message for when no images can be shown
+ */
 class NoImages extends Component {
   render(){
     return(
@@ -30,7 +38,7 @@ class NoImages extends Component {
           <div className="phrase">
             Use the <Search queryFn={this.props.searchImages} />
           </div>
-          <div className="phrase">
+          <div classname="phrase">
             or press <TrendingButton getImages={this.props.getImages} />
           </div>
           to find some.
@@ -40,6 +48,10 @@ class NoImages extends Component {
   }
 }
 
+
+/**
+ * A very basic representation of an image with minimal info
+ */
 class PreviewImage extends Component {
   render() {
     const style = {backgroundImage: `url(${this.props.image.images.downsized.url})`};
@@ -56,6 +68,9 @@ class PreviewImage extends Component {
 }
 
 
+/**
+ * A representation of an image with all the details we care about
+ */
 class DetailedImage extends Component {
   render(){
     let classname = "selected";
@@ -97,6 +112,10 @@ class DetailedImage extends Component {
   }
 }
 
+
+/**
+ * An individual attribute detail
+ */
 class Detail extends Component {
   render(){
     return(

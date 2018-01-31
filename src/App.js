@@ -5,13 +5,19 @@ import {ClearButton, TrendingButton} from './Buttons.js';
 
 import './App.css';
 
+
+/**
+ * Standard entry point to the application
+ */
 class App extends Component {
   constructor(props){
     super(props);
+
     this.state = {
       loading: false,
       images: []
     };
+
     this.searchImages = this.searchImages.bind(this);
     this.clearImages = this.clearImages.bind(this);
     this.getImages = this.getImages.bind(this);
@@ -69,6 +75,9 @@ class App extends Component {
 }
 
 
+/**
+ * Header bar of the page with search and options
+ */
 class TitleBar extends Component {
   render(){
     return (
@@ -89,6 +98,9 @@ class TitleBar extends Component {
 }
 
 
+/**
+ * Body of the page with images and default views
+ */
 class Content extends Component {
   constructor(props){
     super(props);
@@ -101,12 +113,15 @@ class Content extends Component {
     this.selectImage = this.selectImage.bind(this);
     this.removeSelected = this.removeSelected.bind(this);
   }
+
   componentDidMount(){
     document.addEventListener("keydown", (key) => this.handleKey(key), false);
   }
+
   componentWillUnmount(){
     document.removeEventListener("keydown", (key) => this.handleKey(key), false);
   }
+
   handleKey(key){
     if(key.key === "Escape")
       return this.removeSelected();
@@ -116,18 +131,22 @@ class Content extends Component {
     if(key.key === "ArrowLeft")
       return this.changeSelected(-1);
   }
+
   changeSelected(by){
     if(this.state.selectedIndex === null) return;
     this.setState({noSelectedAnimate: true});
     this.selectImage((this.props.images.length + this.state.selectedIndex + by) % this.props.images.length);
   }
+
   selectImage(index){
     this.setState({selectedIndex: index, closing: false});
   }
+
   removeSelected(){
     this.setState({closing: true, noSelectedAnimate: false});
     setTimeout(() => this.setState({selectedIndex: null}), 400);
   }
+
   render(){
     const loading = this.props.loading ? <div className="loading"></div> : "";
     const selected = this.state.selectedIndex !== null ?

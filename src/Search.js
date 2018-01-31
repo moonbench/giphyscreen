@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+
+/**
+ * A simple search form that submits its value to a provided function
+ */
 class Search extends Component {
   constructor(props){
     super(props);
