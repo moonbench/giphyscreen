@@ -5,6 +5,8 @@ import {ClearButton, TrendingButton} from './Buttons.js';
 
 import './App.css';
 
+const api_key = "";
+
 
 /**
  * Standard entry point to the application
@@ -36,14 +38,14 @@ class App extends Component {
 
   searchImages(term){
     this.setState({loading: true});
-    fetch(`http://api.giphy.com/v1/gifs/search?api_key=IK1r2Tz4gU9FgDltR7LlJhzaUKvZvu1C&q=${term}`)
+    fetch(`http://api.giphy.com/v1/gifs/search?api_key=${api_key}&q=${term}`)
       .then((response) => response.json())
       .then((result) => this.setImages(result.data));
   }
 
   getImages(){
     this.setState({loading: true});
-    fetch("http://api.giphy.com/v1/gifs/trending?api_key=IK1r2Tz4gU9FgDltR7LlJhzaUKvZvu1C")
+    fetch(`http://api.giphy.com/v1/gifs/trending?api_key=${api_key}`)
       .then((response) => response.json())
       .then((result) => this.setImages(result.data));
   }
