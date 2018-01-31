@@ -108,7 +108,7 @@ class Content extends Component {
     document.removeEventListener("keydown", (key) => this.handleKey(key), false);
   }
   handleKey(key){
-    if(key.key == "Escape")
+    if(key.key === "Escape")
       return this.removeSelected();
 
     let index = this.state.selectedIndex;
