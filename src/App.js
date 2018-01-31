@@ -95,6 +95,7 @@ class App extends Component {
                     <Search queryFn={this.searchImages} />
                     or press
                     <TrendingButton getImages={this.getImages} />
+                    to find some.
                   </div>
                 </div>
               }
@@ -110,6 +111,7 @@ class TitleBar extends Component {
   render(){
     return (
       <div className="titlebar clearfix">
+        <Search queryFn={this.props.searchImages} showButton={true} />
         <h1>
           GIPHY trending explorer
         </h1>
@@ -119,7 +121,6 @@ class TitleBar extends Component {
         <div className="refresh">
           <TrendingButton getImages={this.props.getImages} />
         </div>
-        <Search queryFn={this.props.searchImages} showButton={true} />
       </div>
     );
   }
@@ -133,7 +134,7 @@ class ClearButton extends Component {
 
 class TrendingButton extends Component {
   render(){
-    return (<button onClick={this.props.getImages}>View trending</button>);
+    return (<button onClick={this.props.getImages}>View latest trending</button>);
   }
 }
 

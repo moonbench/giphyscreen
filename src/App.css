@@ -1,5 +1,6 @@
 .App {
   text-align: left;
+  margin: 1.4em 1em;
 }
 
 .titlebar > div {
@@ -117,6 +118,7 @@
 }
 .selected.closing .modal {
   animation: flip-in-bottom 1 0.4s ease;
+  transform: rotateX(-90deg) translateY(4em);
 }
 .selected .title {
   margin-bottom: 0.3em;
