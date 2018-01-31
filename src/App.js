@@ -111,7 +111,6 @@ class Content extends Component {
     if(key.key === "Escape")
       return this.removeSelected();
 
-    let index = this.state.selectedIndex;
     if(key.key === "ArrowRight")
       return this.changeSelected(1);
     if(key.key === "ArrowLeft")
