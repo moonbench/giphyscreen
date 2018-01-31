@@ -21,13 +21,13 @@ body {
 
 
 a {
-    color: #009;
+    color: #EFEFEF;
 }
 a:focus {
-    color: #1eb2bd;
+    color: #EFDFDF;
 }
 a:active {
-    color: #427cad;
+    color: #EFCFCF;
 }
 
 blockquote {

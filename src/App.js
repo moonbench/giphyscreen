@@ -11,6 +11,8 @@ class App extends Component {
     this.searchImages = this.searchImages.bind(this);
     this.clearImages = this.clearImages.bind(this);
     this.getImages = this.getImages.bind(this);
+    this.selectImage = this.selectImage.bind(this);
+    this.removeSelected = this.removeSelected.bind(this);
   }
 
   componentDidMount(){
@@ -46,6 +48,14 @@ class App extends Component {
     this.setState({images: [], cleared: true});
   }
 
+  selectImage(image){
+    this.setState({selectedImage: image});
+  }
+
+  removeSelected(){
+    this.setState({selectedImage: null});
+  }
+
   render() {
     return (
       <div className="App">
@@ -57,11 +67,22 @@ class App extends Component {
           {this.state.loading &&
             <div className="loading"></div>
           }
+          {this.state.selectedImage &&
+            <Details
+              image={this.state.selectedImage}
+              close={this.removeSelected}
+              />
+          }
           {!this.state.loading &&
             <div className="tiled">
               {this.state.images.length > 0 &&
                 this.state.images.map((image, id) => {
-                  return <Image key={id} image={image} />;
+                  return(
+                    <PreviewImage
+                      key={id}
+                      image={image}
+                      selectImage={this.selectImage} />
+                  );
                 })
               }
               {this.state.images.length <= 0 &&
@@ -88,7 +109,6 @@ class TitleBar extends Component {
       <div className="titlebar clearfix">
         <h1>
           GIPHY trending explorer
-
         </h1>
         <div className="clear">
           <ClearButton clearImages={this.props.clearImages} />
@@ -140,18 +160,44 @@ class Search extends Component {
   }
 }
 
-class Image extends Component {
+
+class PreviewImage extends Component {
   render() {
     const style = {backgroundImage: `url(${this.props.image.images.downsized.url})`};
     return (
-      <div className="image" style={style}>
+      <div className="image" style={style} onClick={() => this.props.selectImage(this.props.image)}>
         <div className="info">
-          <div className="title">{this.props.image.title}</div>
+          <div className="title">
+            {this.props.image.title.length > 0 ? this.props.image.title : "No title"}
+          </div>
         </div>
       </div>
     );
   }
 }
 
+
+class Details extends Component {
+  render(){
+    return (
+      <div className="selected">
+        <div className="overlay" onClick={this.props.close}></div>
+        <div className="modal">
+          <div className="title clearfix">
+            {this.props.image.title.length > 0 ? this.props.image.title : "No title"}
+            <div className="close">
+              <a href="#" onClick={this.props.close}>Close</a>
+            </div>
+          </div>
+          <div className="image">
+            <video loop autoPlay>
+              <source src={this.props.image.images.original.mp4} type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
 
 export default App;

@@ -60,6 +60,7 @@
   background-repeat: no-repeat;
   background-position: center center;
   animation: flip-out-left 1 0.7s ease;
+  cursor: pointer;
 }
 
 .tiled .image .title {
@@ -83,4 +84,48 @@
 @keyframes flip-out-bottom {
   from { transform: rotateX(-90deg) translateY(4em); }
   to { transform: rotateX(0deg) translateY(0);}
+}
+
+.selected {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.selected .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.8);
+  z-index: 1000;
+  cursor: pointer;
+}
+.selected .modal {
+  z-index: 2000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1em;
+  margin: 5em 10em;
+  background-color: #333;
+  animation: flip-out-bottom 1 0.4s ease;
+  overflow: auto;
+}
+.selected .title .close {
+  float: right;
+}
+.selected .image {
+  text-align: center;
+  padding: 0.4em;
+  margin: 0.5em 0;
+  background-color: #111;
+  border: 1px solid #999;
+}
+.selected .image video {
+  text-align: center;
+  max-height: 100%;
 }
