@@ -22,6 +22,7 @@ class App extends Component {
   setImages(images){
     this.setState({
       loading: false,
+      closing: false,
       images: images
     })
   }
@@ -49,11 +50,12 @@ class App extends Component {
   }
 
   selectImage(image){
-    this.setState({selectedImage: image});
+    this.setState({selectedImage: image, closing: false});
   }
 
   removeSelected(){
-    this.setState({selectedImage: null});
+    this.setState({closing: true});
+    setTimeout(() => this.setState({selectedImage: null}), 400);
   }
 
   render() {
@@ -70,7 +72,8 @@ class App extends Component {
           {this.state.selectedImage &&
             <Details
               image={this.state.selectedImage}
-              close={this.removeSelected}
+              close={(e) => {e.preventDefault(); this.removeSelected()}}
+              closing={this.state.closing}
               />
           }
           {!this.state.loading &&
@@ -180,7 +183,7 @@ class PreviewImage extends Component {
 class Details extends Component {
   render(){
     return (
-      <div className="selected">
+      <div className={`selected ${this.props.closing ? "closing" : ""}`}>
         <div className="overlay" onClick={this.props.close}></div>
         <div className="modal">
           <div className="title clearfix">
@@ -189,11 +192,41 @@ class Details extends Component {
               <a href="#" onClick={this.props.close}>Close</a>
             </div>
           </div>
-          <div className="image">
-            <video loop autoPlay>
-              <source src={this.props.image.images.original.mp4} type="video/mp4" />
-            </video>
+          <div className="contents">
+            <div className="image">
+              <video loop autoPlay>
+                <source src={this.props.image.images.original.mp4} type="video/mp4" />
+              </video>
+            </div>
+            <div className="details">
+              {this.props.image.user &&
+                <Detail name="Poster" value={<a href={this.props.image.user.profile_url} target="_blank">{this.props.image.user.username}</a>} />
+              }
+              <Detail name="Rating" value={this.props.image.rating.toUpperCase()} />
+              <Detail name="Upload Date" value={this.props.image.import_datetime} />
+              <Detail name="Trending Date" value={this.props.image.trending_datetime} />
+              <Detail name="MP4 URL" value={<a href={this.props.image.images.original.mp4} target="_blank">{this.props.image.images.original.mp4}</a>} />
+              <Detail name="GIPHY URL" value={<a href={this.props.image.url} target="_blank">{this.props.image.url}</a>} />
+              <Detail name="Is A Sticker?" value={this.props.image.is_sticker ? "true" : "false"} />
+              <Detail name="ID" value={this.props.image.id} />
+              <Detail name="Type" value={this.props.image.type} />
+            </div>
           </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+class Detail extends Component {
+  render(){
+    return(
+      <div className="detail">
+        <div className="name">
+          {this.props.name}:
+        </div>
+        <div className="value">
+          {this.props.value}
         </div>
       </div>
     );

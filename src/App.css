@@ -110,22 +110,54 @@
   left: 0;
   right: 0;
   padding: 1em;
-  margin: 5em 10em;
+  margin: 2em 10em;
   background-color: #333;
   animation: flip-out-bottom 1 0.4s ease;
-  overflow: auto;
+  border: 1px solid #777;
+}
+.selected.closing .modal {
+  animation: flip-in-bottom 1 0.4s ease;
+}
+.selected .title {
+  margin-bottom: 0.3em;
 }
 .selected .title .close {
   float: right;
 }
+.selected .contents {
+  overflow: auto;
+  max-height: 80vh;
+}
 .selected .image {
   text-align: center;
   padding: 0.4em;
-  margin: 0.5em 0;
+  margin: 0 0 0.5em 0;
   background-color: #111;
   border: 1px solid #999;
 }
 .selected .image video {
   text-align: center;
-  max-height: 100%;
+  max-height: 50vh;
+}
+.selected .details {
+  display: table;
+  background-color: #222;
+  border: 1px solid #555;
+  display: block;
+  padding: 0.2em 1em;
+}
+.selected .details .detail {
+  display: table-row;
+}
+.selected .details .detail > div {
+  display: table-cell;
+  padding: 0 0.2em;
+}
+.selected .details .detail .name {
+  text-align: right;
+  color: #67679e;
+}
+@keyframes flip-in-bottom {
+  from { transform: rotateX(0deg) translateY(0); }
+  to { transform: rotateX(-90deg) translateY(4em);}
 }
