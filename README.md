@@ -11,4 +11,9 @@ This is currently live on https://giphy-trending-app.herokuapp.com/
 ## Installing
 
 1) Clone the repo
-2) Run `npm install` followed by `npm start`
+2) Edit `src/App.js` to add your API key on line 8:
+```javascript
+const api_key = "YOUR KEY HERE";
+```
+
+3) Run `npm install` followed by `npm start`
