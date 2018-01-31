@@ -10,8 +10,37 @@
 .titlebar button {
   height: 2em;
 }
-.search {
+.titlebar .search {
   float: right;
+}
+
+.loading {
+  border: 16px solid #444;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  text-align: center;
+  margin: 2em auto;
+  animation: spin infinite 1s linear;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.no_images {
+  font-size: 1.9em;
+  color: #777;
+  text-align: center;
+  margin: 1.5em;
+  animation: flip-out-bottom 1 0.72s ease;
+}
+.no_images button,
+.no_images .search {
+  margin: 0 0.5em;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 
@@ -20,8 +49,9 @@
 }
 .tiled .image {
   display: inline-block;
-  width: 20%;
+  width: 19%;
   height: 10em;
+  margin: 0.5%;
   border: 3px solid #333;
   background-color: #222;
   overflow: hidden;
@@ -29,7 +59,9 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  animation: flip-out-left 1 0.7s ease;
 }
+
 .tiled .image .title {
   display: none;
   background-color: rgba(0,0,0,0.6);
@@ -41,4 +73,14 @@
 }
 .tiled .image:hover .title {
   display: block;
+}
+
+@keyframes flip-out-left {
+  from { transform: rotateY(90deg) translateX(-50%); }
+  to { transform: rotateY(0deg) translateX(0);}
+}
+
+@keyframes flip-out-bottom {
+  from { transform: rotateX(-90deg) translateY(4em); }
+  to { transform: rotateX(0deg) translateY(0);}
 }
