@@ -17,6 +17,7 @@ body {
     letter-spacing: 0.01em;
     line-height: 1.62em;
     margin: 1em;
+    min-width: 300px;
 }
 
 
