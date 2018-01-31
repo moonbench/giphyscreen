@@ -1,3 +1,6 @@
+body {
+  min-width: 300px;
+}
 .App {
   text-align: left;
   margin: 1.4em 1em;
@@ -36,6 +39,9 @@
   text-align: center;
   margin: 1.5em;
   animation: flip-out-bottom 1 0.72s ease;
+}
+.no_images .phrase {
+  display: inline;
 }
 .no_images button,
 .no_images .search {
@@ -143,6 +149,7 @@
 .selected .image video {
   text-align: center;
   max-height: 50vh;
+  max-width: 100%;
 }
 .selected .details {
   display: table;
@@ -150,6 +157,7 @@
   border: 1px solid #555;
   display: block;
   padding: 0.2em 1em;
+  overflow: auto;
 }
 .selected .details .detail {
   display: table-row;
@@ -172,4 +180,33 @@
   font-size: 0.9em;
   margin: 8em 0 0 0;
   text-align: center;
+}
+
+@media(max-width: 800px) {
+  .titlebar .search {
+    float: none;
+  }
+  .tiled .image {
+    width: 32%;
+  }
+  .selected .modal {
+    margin: 7%;
+  }
+  .no_images .phrase {
+    display: block;
+  }
+}
+@media(max-width: 450px) {
+  .titlebar {
+    text-align: center;
+  }
+  .no_images {
+    text-align: center;
+  }
+  .no_images .search {
+    margin: 0;
+  }
+  .tiled .image {
+    width: 100%;
+  }
 }

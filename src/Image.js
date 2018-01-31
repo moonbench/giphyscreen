@@ -26,10 +26,13 @@ class NoImages extends Component {
     return(
       <div className="no_images">
         <h5>No GIFs to show</h5>
-        <div>Use the
-          <Search queryFn={this.props.searchImages} />
-          or press
-          <TrendingButton getImages={this.props.getImages} />
+        <div>
+          <div className="phrase">
+            Use the <Search queryFn={this.props.searchImages} />
+          </div>
+          <div className="phrase">
+            or press <TrendingButton getImages={this.props.getImages} />
+          </div>
           to find some.
         </div>
       </div>
