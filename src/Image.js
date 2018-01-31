@@ -7,12 +7,12 @@ class Tiles extends Component {
     return(
       <div className="tiled">
         {this.props.images.length > 0 &&
-          this.props.images.map((image, id) => {
+          this.props.images.map((image, index) => {
             return(
               <PreviewImage
-                key={id}
+                key={index}
                 image={image}
-                selectImage={this.props.selectImage} />
+                selectImage={() => this.props.selectImage(index)} />
             );
           })
         }
@@ -41,7 +41,7 @@ class PreviewImage extends Component {
   render() {
     const style = {backgroundImage: `url(${this.props.image.images.downsized.url})`};
     return (
-      <div className="image" style={style} onClick={() => this.props.selectImage(this.props.image)}>
+      <div className="image" style={style} onClick={() => this.props.selectImage()}>
         <div className="info">
           <div className="title">
             {this.props.image.title.length > 0 ? this.props.image.title : "No title"}
@@ -55,8 +55,12 @@ class PreviewImage extends Component {
 
 class DetailedImage extends Component {
   render(){
+    let classname = "selected";
+    if(this.props.closing) classname += " closing";
+    if(this.props.noAnimate) classname += " no_animate";
+
     return (
-      <div className={`selected ${this.props.closing ? "closing" : ""}`}>
+      <div key={this.props.index} className={classname}>
         <div className="overlay" onClick={this.props.close}></div>
         <div className="modal">
           <div className="title clearfix">

@@ -53,11 +53,16 @@ class App extends Component {
           getImages={this.getImages}
           clearImages={this.clearImages}
           searchImages={this.searchImages} />
+
         <Content
           loading={this.state.loading}
           images={this.state.images}
           searchImages={this.searchImages}
           getImages={this.getImages} />
+
+        <div className="footer">
+          Tip: Try using the arrow and escape keys to navigate between images.
+        </div>
       </div>
     );
   }
@@ -89,26 +94,51 @@ class Content extends Component {
     super(props);
     this.state = {
       closing: false,
-      selectedImage: null
+      selectedIndex: null,
+      noSelectedAnimate: false,
     };
 
     this.selectImage = this.selectImage.bind(this);
     this.removeSelected = this.removeSelected.bind(this);
   }
-  selectImage(image){
-    this.setState({selectedImage: image, closing: false});
+  componentDidMount(){
+    document.addEventListener("keydown", (key) => this.handleKey(key), false);
+  }
+  componentWillUnmount(){
+    document.removeEventListener("keydown", (key) => this.handleKey(key), false);
+  }
+  handleKey(key){
+    if(key.key == "Escape")
+      return this.removeSelected();
+
+    let index = this.state.selectedIndex;
+    if(key.key === "ArrowRight")
+      return this.changeSelected(1);
+    if(key.key === "ArrowLeft")
+      return this.changeSelected(-1);
+  }
+  changeSelected(by){
+    if(this.state.selectedIndex === null) return;
+    this.setState({noSelectedAnimate: true});
+    this.selectImage((this.props.images.length + this.state.selectedIndex + by) % this.props.images.length);
+  }
+  selectImage(index){
+    this.setState({selectedIndex: index, closing: false});
   }
   removeSelected(){
-    this.setState({closing: true});
-    setTimeout(() => this.setState({selectedImage: null}), 400);
+    this.setState({closing: true, noSelectedAnimate: false});
+    setTimeout(() => this.setState({selectedIndex: null}), 400);
   }
   render(){
     const loading = this.props.loading ? <div className="loading"></div> : "";
-    const selected = this.state.selectedImage ?
+    const selected = this.state.selectedIndex !== null ?
       <DetailedImage
-        image={this.state.selectedImage}
+        index={this.state.selectedIndex}
+        image={this.props.images[this.state.selectedIndex]}
         close={(e) => {e.preventDefault(); this.removeSelected()}}
         closing={this.state.closing}
+        searchImages={this.props.searchImages}
+        noAnimate={this.state.noSelectedAnimate}
         /> : "";
     const images = !this.props.loading && this.props.images.length > 0 ?
       <Tiles images={this.props.images} selectImage={this.selectImage} /> : "";

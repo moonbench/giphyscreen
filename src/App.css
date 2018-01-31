@@ -120,6 +120,9 @@
   animation: flip-in-bottom 1 0.4s ease;
   transform: rotateX(-90deg) translateY(4em);
 }
+.selected.no_animate .modal {
+  animation: none;
+}
 .selected .title {
   margin-bottom: 0.3em;
 }
@@ -162,4 +165,11 @@
 @keyframes flip-in-bottom {
   from { transform: rotateX(0deg) translateY(0); }
   to { transform: rotateX(-90deg) translateY(4em);}
+}
+
+.footer {
+  color: #666;
+  font-size: 0.9em;
+  margin: 8em 0 0 0;
+  text-align: center;
 }
