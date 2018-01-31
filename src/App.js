@@ -69,7 +69,12 @@ class App extends Component {
           getImages={this.getImages} />
 
         <div className="footer">
-          Tip: Try using the arrow and escape keys to navigate between images.
+          <div>
+            Tip: Try using the arrow and escape keys to navigate between images.
+          </div>
+          <div>
+            Source: <a href="https://github.com/moonbench/giphyscreen">github</a>
+          </div>
         </div>
       </div>
     );
