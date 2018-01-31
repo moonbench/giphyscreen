@@ -49,6 +49,7 @@ input[type='submit'] {
     cursor: pointer;
     vertical-align: top;
     color: #000;
+    background-color: #FFF;
 }
 .button:focus,
 button:focus,
@@ -100,7 +101,6 @@ select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background-color: transparent;
     border: 1px solid #D4D4D4;
     padding: 0.5em 0.4em;
     vertical-align: top;

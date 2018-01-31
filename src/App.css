@@ -2,9 +2,18 @@
   text-align: left;
 }
 
-.logo-text {
-  fill: #FFF;
+.titlebar > div {
+  display: inline-block;
+  margin-bottom: 1em;
 }
+.titlebar input,
+.titlebar button {
+  height: 2em;
+}
+.search {
+  float: right;
+}
+
 
 .tiled {
   vertical-align: top;
@@ -17,6 +26,9 @@
   background-color: #222;
   overflow: hidden;
   vertical-align: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 .tiled .image .title {
   display: none;
